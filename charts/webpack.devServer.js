@@ -7,7 +7,7 @@ const config = require('./webpack.base');
 
 const chokidar = require('chokidar');
 
-const watcher = chokidar.watch(path.resolve(cwd, 'echarts/components'), {
+const watcher = chokidar.watch(path.resolve(cwd, 'charts/components'), {
 	ignoreInitial: true
 });
 
@@ -20,7 +20,7 @@ function start() {
 	console.log(123);
 	compiler = webpack(config());
 	server = new webpackDevServer(compiler, {
-		contentBase: path.resolve(cwd, 'echarts/components'),
+		contentBase: path.resolve(cwd, 'charts/components'),
 		watchContentBase: true,
 		compress: true,
 		port: 9092

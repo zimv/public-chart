@@ -13,6 +13,7 @@
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
     "element-ui": "^2.13.0",
+    "highcharts": "^8.0.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "vue": "^2.6.11",

@@ -1,23 +1,26 @@
-//因为在做webpack配置的时候，把三方库作为公共包了，这里引入会导致三方库被再次打包到组件里，不要import引入
-import echarts from 'echarts';
+import Highcharts from 'highcharts';
+//require('highcharts/modules/exporting')(Highcharts);
 //监听页面放大缩小
 window.addEventListener('resize', onResize);
+console.log(123)
 
 let resizeTimeout;
-let $chart = echarts.init(document.getElementById('chart'));
+let $chart;
 
 function onResize() {
 	clearTimeout(resizeTimeout);
 	console.log('resize');
 	console.log(document.body.clientWidth);
 	resizeTimeout = setTimeout(() => {
-		$chart.resize();
+		$chart && $chart.resize();
 	}, 500);
 }
 
 export const onMessage = receiveMessage => {
+	console.log(5432)
 	window.addEventListener('message', receiveMessage);
 };
 export function createChart(option) {
-	$chart.setOption(option, true);
+	//$chart.setOptions(option, true);
+	$chart = Highcharts.chart('chart', option);
 }

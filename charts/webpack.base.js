@@ -43,23 +43,28 @@ function collectFiles(dirPath){
 }
  
 module.exports = () => {
-	let entrys = {},
+	let libraryEntrys = {},
+		entrys = {},
 		HtmlWebpackPlugins = [],
 		cacheGroups = {};
 	const chartsLibrary = collectFiles(_componentsPath);
-	console.log(chartsLibrary)
+	//console.log(chartsLibrary)
 	chartsLibrary.forEach(lib => {
+		//console.log(`node_modules/${lib.libraryName}`)
 		cacheGroups[lib.libraryName] = {
-			test: /[\\/]node_modules[\\/]/,
-			chunks: 'all',
-			enforce: true,
-			priority: 10,
-			name: lib.libraryName
+			chunks: "all",        // 必须三选一： "initial"(初始化) | "all" | "async"(默认就是异步)
+			test: new RegExp(`[\\/]node_modules[\\/]${lib.libraryName}[\\/]`),///[\\/]node_modules[\\/](echarts|highcharts)[\\/]/,//`node_modules/${lib.libraryName}`,     // 正则规则验证，如果符合就提取 chunk
+			name: lib.libraryName,           // 要缓存的 分隔出来的 chunk 名称
+			priority: 20,
+			minChunks: 1,
+			//enforce: true,
+			//reuseExistingChunk: true   // 可设置是否重用已用chunk 不再创建新的chunk
 		}
+		libraryEntrys[lib.libraryName] = lib.libraryName;
 		lib.files.forEach(item => {
 			let name = item.split('.')[0];
 			if(name[0] == '/') name = name.slice(1);
-			console.log(name)
+			//console.log(name)
 			entrys[name] = path.resolve(cwd, 'charts/components/' + item);
 			HtmlWebpackPlugins.push(
 				new HtmlWebpackPlugin({
@@ -70,14 +75,15 @@ module.exports = () => {
 			);
 		});
 	});
-	console.log(entrys)
+	//console.log(entrys)
 	//console.log(HtmlWebpackPlugins)
-
+	console.log(libraryEntrys)
+	console.log(cacheGroups)
 	return {
-		mode: 'development',
-		//mode: 'production',
+		//mode: 'development',
+		mode: 'production',
 		entry: {
-			'echarts': 'echarts',
+			...libraryEntrys,
 			...entrys,
 		},
 		stats: 'errors-only',
@@ -87,14 +93,15 @@ module.exports = () => {
 		},
 		optimization:{
 			splitChunks: {
+				chunks (chunk) {
+					console.log(chunk.name)
+					return chunk.name!='highcharts' && chunk.name!='echarts';
+				},
 				cacheGroups: {
 					...cacheGroups
 				}
 			}
 		},
-		// externals:{
-		// 	echarts: 'echarts'
-		// },
 		plugins: [
 			...HtmlWebpackPlugins
 		]
