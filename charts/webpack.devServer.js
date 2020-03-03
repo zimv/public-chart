@@ -17,8 +17,9 @@ let server;
 let compiler;
 function start() {
 	if (server) server.close();
-	console.log(123);
-	compiler = webpack(config());
+	const cfg = config();
+	cfg.mode = 'development';
+	compiler = webpack(cfg);
 	server = new webpackDevServer(compiler, {
 		contentBase: path.resolve(cwd, 'charts/components'),
 		watchContentBase: true,

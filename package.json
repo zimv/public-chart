@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "charts-build": "webpack --config charts/webpack.config.js",
+    "charts-build": "webpack --mode=production --config charts/webpack.config.js",
     "charts-dev": "node charts/webpack.devServer.js"
   },
   "dependencies": {

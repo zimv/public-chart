@@ -22,7 +22,7 @@ function collectFiles(){
 							findFile(fPath, lib);
             }
             if (stat.isFile() === true) {
-							//base作为基础代码，不被作为我们输出的组件,所以排除
+							//排除一些并不是图表组件的文件
 							if(!lib.excludeComponents.some(item=>{
 								return fPath.includes(item)
 							})){
@@ -77,10 +77,8 @@ module.exports = () => {
 	//console.log(entrys)
 	//console.log(HtmlWebpackPlugins)
 	//console.log(libraryEntrys)
-	console.log(cacheGroups)
+	//console.log(cacheGroups)
 	return {
-		mode: 'development',
-		//mode: 'production',
 		entry: {
 			...libraryEntrys,
 			...entrys,
@@ -92,10 +90,6 @@ module.exports = () => {
 		},
 		optimization:{
 			splitChunks: {
-				// chunks (chunk) {
-				// 	console.log(chunk.name)
-				// 	return chunk.name!='highcharts' && chunk.name!='echarts' && chunk.name!='@antv/g2';
-				// },
 				cacheGroups: {
 					...cacheGroups
 				}
