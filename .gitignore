@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+# from charts build
+/public/charts
 
 # local env files
 .env.local
