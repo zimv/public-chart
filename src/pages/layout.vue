@@ -79,6 +79,18 @@ export default {
               path: "/highcharts/line"
             }
           ]
+        },
+        {
+          title: "antv",
+          icon: "iconfont icon-flag",
+          path: "/antv",
+          children: [
+            {
+              title: "折线图",
+              icon: "iconfont icon-fire",
+              path: "/antv/line"
+            }
+          ]
         }
       ]
     };

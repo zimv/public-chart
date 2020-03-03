@@ -10,6 +10,7 @@
     "charts-dev": "node charts/webpack.devServer.js"
   },
   "dependencies": {
+    "@antv/g2": "^4.0.0",
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
     "element-ui": "^2.13.0",

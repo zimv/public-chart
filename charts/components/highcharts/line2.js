@@ -6,4 +6,3 @@ onMessage(e => {
 	const { option } = e.data;
 	createChart(option);
 });
-console.log(68788787)

@@ -20,6 +20,11 @@ const router = new Router({
           path: 'highcharts/line',
           name: 'highcharts-line',
           component: () => import('@/pages/highcharts/line'),
+        },
+        {
+          path: 'antv/line',
+          name: 'antv-line',
+          component: () => import('@/pages/antv/line'),
         }
       ]
     },
