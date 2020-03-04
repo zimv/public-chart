@@ -1,7 +1,18 @@
 <template>
   <el-container id="container">
     <el-header background-color="#373d41">
-      <span>logo</span>
+      Public chart by
+      <a
+        style="color:#2dd1e2;text-decoration: none;"
+        href="https://github.com/zimv"
+        _target="_blank"
+      >zimv</a>
+      ------- github:
+      <a
+        style="color:#fff;text-decoration: none;"
+        href="https://github.com/zimv/public_chart"
+        _target="_blank"
+      >https://github.com/zimv/public_chart</a>
     </el-header>
     <el-container>
       <el-aside width="200px">
@@ -12,18 +23,19 @@
           active-text-color="#409EFF"
           @select="menuSelect"
           style="border:0px;"
-          default-active="{this.route.path}"
+          :default-active="$route.path"
         >
           <template v-for="menu in menus">
-            <el-submenu :index="menu.path" class="sub" v-if="menu.children">
+            <el-submenu :index="menu.path" class="sub" v-if="menu.children" :key="menu.path">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i :class="menu.icon"></i>
                 <span>{{menu.title}}</span>
               </template>
               <el-menu-item
                 v-for="menuChild in menu.children"
                 :class="menuChild.icon"
                 :index="menuChild.path"
+                :key="menuChild.path"
               >
                 <span class="menus-text">{{menuChild.title}}</span>
               </el-menu-item>
@@ -53,41 +65,50 @@ export default {
       menus: [
         {
           title: "业务集合",
-          icon: "iconfont el-icon-school",
-          path: "/Company/list"
+          icon: "iconfont el-icon-coin",
+          path: "/collectpage"
         },
         {
           title: "echarts",
-          icon: "iconfont icon-flag",
+          icon: "iconfont el-icon-chicken",
           path: "/echarts",
           children: [
             {
+              title: "折线图",
+              path: "/echarts/line"
+            },
+            {
               title: "柱状图",
-              icon: "iconfont icon-fire",
               path: "/echarts/bar"
+            },
+            {
+              title: "堆叠柱状图",
+              path: "/echarts/stack-bar"
+            },
+            {
+              title: "饼图",
+              path: "/echarts/pie"
             }
           ]
         },
         {
           title: "highcharts",
-          icon: "iconfont icon-flag",
+          icon: "iconfont el-icon-grape",
           path: "/highcharts",
           children: [
             {
               title: "折线图",
-              icon: "iconfont icon-fire",
               path: "/highcharts/line"
             }
           ]
         },
         {
           title: "antv",
-          icon: "iconfont icon-flag",
+          icon: "iconfont el-icon-ice-cream-round",
           path: "/antv",
           children: [
             {
               title: "折线图",
-              icon: "iconfont icon-fire",
               path: "/antv/line"
             }
           ]
@@ -107,6 +128,7 @@ export default {
 <style>
 #container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  text-align: left;
 }
 
 .el-container {
@@ -147,6 +169,7 @@ export default {
 
 .el-aside {
   background-color: #333744;
+  text-align: left;
 }
 
 .el-main {
@@ -176,10 +199,6 @@ export default {
   margin-left: 5px;
 }
 
-.el-menu-item {
-  width: 100%;
-  vertical-align: middle;
-}
 .page-title {
   font-size: 20px;
   margin-bottom: 20px;

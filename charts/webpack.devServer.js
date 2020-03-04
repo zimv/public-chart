@@ -11,7 +11,7 @@ const watcher = chokidar.watch(path.resolve(cwd, 'charts/components'), {
 	ignoreInitial: true
 });
 
-watcher.on('add', start);
+watcher.on('add', start).on('unlink', start);
 
 let server;
 let compiler;
