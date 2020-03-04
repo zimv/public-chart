@@ -95,7 +95,6 @@ export default {
     },
     onloadPage() {
       const { keys, values } = JSON.parse(this.list);
-      //
       this.$refs.ifa.contentWindow.postMessage(
         {
           name: this.name,
@@ -105,7 +104,15 @@ export default {
         },
         this.src
       );
+      window.addEventListener("message", this.onMessage);
+    },
+    onMessage(event) {
+      console.log("收到来着组件页面的事件消息");
+      console.log(event);
     }
+  },
+  destroy() {
+    window.removeEventListener("message", this.onMessage);
   }
 };
 </script>

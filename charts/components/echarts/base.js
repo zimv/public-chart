@@ -5,6 +5,27 @@ window.addEventListener('resize', onResize);
 
 let resizeTimeout;
 let $chart = echarts.init(document.getElementById('chart'));
+let originEvent;
+
+//可以封装所有事件，通过当前base注册，而后所有的图表组件也不用再做任何封装，postMessage发送给调用页面,调用页面自行选择是否接收和使用这些事件
+$chart.on('click', (e) => {
+	const obj ={
+		...e,
+		event: 'event会存在重复引用问题，把它设置为空，如果需要其中属性，再单独控制' //e.event会存在重复引用问题，把它设置为空，如果需要其中属性，再单独控制
+	}
+	if(originEvent){
+		window.parent.postMessage(obj,'*');
+	}
+})
+$chart.on('dblclick', (e) => {
+	const obj ={
+		...e,
+		event: 'event会存在重复引用问题，把它设置为空，如果需要其中属性，再单独控制' //e.event会存在重复引用问题，把它设置为空，如果需要其中属性，再单独控制
+	}
+	if(originEvent){
+		window.parent.postMessage(obj,'*');
+	}
+})
 
 function onResize() {
 	clearTimeout(resizeTimeout);
@@ -16,7 +37,10 @@ function onResize() {
 }
 
 export const onMessage = receiveMessage => {
-	window.addEventListener('message', receiveMessage);
+	window.addEventListener('message', (...args) => {
+		originEvent = args[0];
+		receiveMessage(...args);
+	});
 };
 export function createChart(option) {
 	$chart.setOption(option, true);
