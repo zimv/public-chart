@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const chartsConfig = require('./charts.config');
 const cwd = process.cwd();
 const fs = require('fs');
-//const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 
 const _componentsPath = path.resolve(cwd, 'charts/components');
 
@@ -96,6 +96,8 @@ module.exports = () => {
 			}
 		},
 		plugins: [
+			//不管是开发，还是打包，都需要删除public/charts，否则开发环境下会优先走静态资源，代理会失效。
+			new CleanWebpackPlugin(),
 			...HtmlWebpackPlugins
 		]
 	};

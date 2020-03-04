@@ -8,7 +8,6 @@ onMessage(e => {
 	const opt = setOption(name, keys, values, option || {});
 	createChart(opt);
 });
-console.log(1);
 //默认配置
 const _defaultOpt = {
 	color: ['#3398DB'],

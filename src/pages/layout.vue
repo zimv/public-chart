@@ -45,7 +45,7 @@
                 <span class="menus-text">{{menuChild.title}}</span>
               </el-menu-item>
             </el-submenu>
-            <el-menu-item v-else :class="menu.icon" :index="menu.path">
+            <el-menu-item v-else :class="menu.icon" :index="menu.path" :key="menu.path">
               <span class="menus-text">{{menu.title}}</span>
             </el-menu-item>
           </template>
