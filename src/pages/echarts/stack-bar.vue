@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-const _origin = location.origin;
+const _origin = location.origin + "/public-chart/dist";
 const _basePath = _origin + "/charts/echarts/v1";
 export default {
   meta: {

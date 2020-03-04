@@ -1,5 +1,6 @@
 module.exports = {
   lintOnSave: true,
+  publicPath: '/public-chart/dist',
   devServer: {
     port: 8886,
     proxy: {

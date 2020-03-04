@@ -1,17 +1,22 @@
 <template>
   <el-container id="container">
     <el-header background-color="#373d41">
+      <a
+        style="color:#fff;text-decoration: none;float:left"
+        href="https://dashiren.cn"
+        target="_blank"
+      >首页</a>
       Public chart by
       <a
         style="color:#2dd1e2;text-decoration: none;"
         href="https://github.com/zimv"
-        _target="_blank"
+        target="_blank"
       >zimv</a>
       ------- github:
       <a
         style="color:#fff;text-decoration: none;"
         href="https://github.com/zimv/public_chart"
-        _target="_blank"
+        target="_blank"
       >https://github.com/zimv/public_chart</a>
     </el-header>
     <el-container>
@@ -140,6 +145,7 @@ export default {
   background-color: #373d41;
   color: white !important;
   line-height: 60px;
+  text-align: right;
 }
 
 .el-header .logo {

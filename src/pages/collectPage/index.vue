@@ -11,7 +11,7 @@
 </template>
 <script>
 const _origin = location.origin;
-const _basePath = _origin;
+const _basePath = _origin + "/public-chart/dist/index.html#";
 export default {
   meta: {
     title: "集合"
