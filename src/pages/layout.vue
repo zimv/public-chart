@@ -131,6 +131,9 @@ export default {
 </script>
 
 <style>
+pre {
+  tab-size: 2;
+}
 #container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   text-align: left;
