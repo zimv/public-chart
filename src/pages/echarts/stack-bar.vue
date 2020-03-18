@@ -22,11 +22,11 @@
     <el-button type="text" @click="renderCoder">生成代码</el-button>
     <div v-show="dom">
       <div>dom:</div>
-      <div>{{dom}}</div>
+      <pre v-html="$prismJs(dom)"></pre>
     </div>
     <div v-show="js">
       <div>js:</div>
-      <div>{{js}}</div>
+      <pre v-html="$prismJs(js)"></pre>
     </div>
   </div>
 </template>
